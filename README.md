@@ -50,3 +50,10 @@ The primary source of information about MB-System is the project website at [htt
 - [User and developer email discussion lists](https://www.mbari.org/products/research-software/mb-system/mb-system-discussion-lists/)
 
 ### Python modules
+
+
+## Todos
+
+- [ ] Implementation into MB-System
+- [ ] Making sure all required python modules are present and/or setting up a python envrionment to guarantee correct execution
+- [ ] 
