@@ -5,9 +5,9 @@ MB-System tool to download World Ocean Atlas 2018 (WOA18) temperature and salini
 
 Under the assumption of a rather flat seafloor, the detected depths of the beams of a multibeam ping should lay on a straight line if the applied SVP is a good/perfect one. If not, the calculated bathymetry will bend either upwards or downwards, especially on the outer beams. In order to evaluate the accuracy of the SVPs used in this study and to compare them against one another the residuals of the individual pings per beam were calculated. These residuals are the difference between a linear fit of a ping and the actual value for all the beams within that ping.
 
-![residuals](Example_Images/Residuals.png | width=100)
+![residuals](Example_Images/Residuals.png | width=100px)
 
-!linear_regression](Example_Images/residual_sketch.png | width=100)
+!linear_regression](Example_Images/residual_sketch.png | width=100px)
 
 ## Programs of this tool
 
