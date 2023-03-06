@@ -59,13 +59,32 @@ The **mbbestsvp** can be used directly from the command line and takes the follo
 The user will end up with a subfolder containing all the SVP profiles for the swathfile from the WOA18, a subfolder (svppngs) with images illustrating the flattening effect together with some metrics and a ranking of all files based on the root mean squared error (RMSE) in the terminal where the lowest RMSE represents the 'best' SVP.
 
 ## Example (Black Sea)
+
+This seciton should serve as a quick example of how to use this tool and the two programs in general:
+
+1. Following your MB-System workflow including flagging of outlier etc.
+2. Decide which area from the WOA18 you are interested in. In this example below we are only interested in the finer grid resolution, an area around the Black Sea, we use the Black Sea corrective term and store it in the output folder named test. Since we omitted the time and period flags we will get all times and both periods. We end up with our specified and cropped sound velocity netcdf files as well as an image showing our specified area that we are interested in.
+
 ```
-python mbdownloadwoa18.py -O F:\test -T 01 -R 01 -A 27 43 40 49
+python mbdownloadwoa18.py -O F:\test -R 04 -A 27 43 40 49 -C BLACK
 ```
 
 ![Cropped area](Example_Images/cropped_area.png)
 
+3. If that ran through we can get our sound velocity profiles, apply them and obtain the best SVP. In the code example below we provide the svpfolder where we just stored out netcdf sound velocity files from step 2, an optional profiles folder called myprofiles and our flat seafloor swathfile.
+
+```
+python mbbestsvp.py -S F:\test -O ./myprofiles -I swathfile.mb59 
+```
+
+4. Afterward, if the program finished we end up with a ranking of all the SVPs and the best one (based on the RMSE) is automatically applied onto the swathfile. We could now use that SVP on a whole survey consisting of several swathfiles and see if it improves our overall map.
+
+An example of the flattening done by the best SVP for this example is given below.
+
 ![best_svp](Example_Images/woa18_A5B7_SVcorrectedblacksea00an04_residuals.png)
+
+To illustrate potential improvements of this best SVP over the SVP that came with the swathfile the residuals of that 'internal' SVP are also shown below. A slight improvement can be seen.
+
 ![worst_svp](Example_Images/internal_residuals.png)
 
 
