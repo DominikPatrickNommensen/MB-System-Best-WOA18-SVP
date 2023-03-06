@@ -7,7 +7,7 @@ Under the assumption of a rather flat seafloor, the detected depths of the beams
 
 ![residuals](Example_Images/Residuals.png | width=100px)
 
-!linear_regression](Example_Images/residual_sketch.png | width=100px)
+![linear_regression](Example_Images/residual_sketch.png)
 
 ## Programs of this tool
 
