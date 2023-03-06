@@ -15,30 +15,68 @@ if __name__=='__main__':
     date = datetime.datetime.now()
     #create a parser which takes some arguments as specified below.
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-                                     description=(''))
+                                     description=('''Calculates the World Ocean 
+                                                  Atlas 2018 SVPs for a specified 
+                                                  flat part of a multibeam survey 
+                                                  based on the sound velocity 
+                                                  netcdf files created by "mbdownloadwoa18", 
+                                                  applies them on the swathfile and 
+                                                  evaluates its capabilities of 
+                                                  flattening the seafloor. The 
+                                                  WOA18 and SVPs stored in the 
+                                                  swathfile are ranked and the 
+                                                  best SVP is applied to the swathfile.
+                                                  The best SVP could than be used 
+                                                  for a sound speed correction of 
+                                                  the whole survey. In addition, 
+                                                  a folder with pngs showing the 
+                                                  flattening of the seafloor by each 
+                                                  SVP is also created.'''))
       
     parser.add_argument('-N', '--nearest',  required=False, action='store_true',
-                        help='')
+                        help='''The user can use this flag to use the nearest 
+                        grid point of the center of the provided swathfile area 
+                        to extract SVPs. If the user does not use this flag 
+                        the surrounding 4 grid points are used to extract mean 
+                        SVPs that bound the area.''')
     
-    parser.add_argument('-P', '--period', type=str, required=False,
-                        default="both", metavar="",
-                        help='')
+    parser.add_argument('-P', '--period',type=str, required=False,
+                        metavar="Averaged period", nargs='+', 
+                        choices=["decav", "A5B7"],
+                        default=["decav", "A5B7"],
+                        help='''The user can choose between averaged decades 
+                        [decav] and the 2005 to 2017 average [A5B7] periods 
+                        If not using this argument both periods will be 
+                        used.''')
     
-    parser.add_argument('-R', '--resolution', type=str, required=False,
-                        default="both", metavar="", 
-                        help='')
+    parser.add_argument('-R', '--resolution', type=str, required=False, 
+                        metavar="Grid resolution", nargs='+',
+                        choices=["01", "04"],
+                        default=["01", "04"],
+                        help='''The user can choose between the coarser 1° [01] 
+                        or the finer 0.25° [04] grid resolution. If not 
+                        using this argument both grid resolutions will be 
+                        used.''')
 
     parser.add_argument('-I', '--swathfile', type=str, required=False,
-                        default="datalist.mb-1", metavar="",
-                        help='')
+                        default="datalist.mb-1", metavar="Swathfile/Datalist",
+                        help='''The user can specify a swathfile or a datalist 
+                        from a realitvely flat area of a survey to evaluate 
+                        the WOA18 SVPS based on their capabilities to "flatten" 
+                        the seafloor.''')
     
     parser.add_argument('-S', '--svpfolder', type=str, required=True,
                         metavar="SVP folder",
-                        help='')
+                        help='''The user needs to specify the path where the 
+                        calculated (and cropped) SVP netcdf files are stored, 
+                        that were created using "mbdownloadwoa18".''')
     
     parser.add_argument('-O', '--outputfolder', type=str, required=False,
                         default='./svpprofiles', metavar="SVP profile folder",
-                        help='')
+                        help='''The user can specify the name of a new or existing 
+                        folder where all the individual SVP profiles will be 
+                        stored in. If not a new "svpprofiles" folder will be 
+                        created in the current working directory.''')
     
     args = parser.parse_args()
     sf = SwathFileInfo(period=args.period, resolution=args.resolution, 
