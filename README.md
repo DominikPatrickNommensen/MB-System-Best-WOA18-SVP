@@ -1,5 +1,5 @@
 # MB-System-Best-WOA18-SVP
-MB-System tool to download World Ocean Atlas 2018 (WOA18) temperature and salinity files, calculate the sound velocity using the [UNESCO](https://repository.oceanbestpractices.org/handle/11329/109)  and the [Leroy](https://doi.org/10.1121/1.2988296) formula, applying them on a flat seafloor swathfile and find the best World Ocean Atlas 2018 sound velocity profiles for sound speed correction of a survey.
+MB-System tool to download World Ocean Atlas 2018 (WOA18) temperature and salinity files, calculate the sound velocity using the [UNESCO](https://repository.oceanbestpractices.org/handle/11329/109) with corrective terms and the [Leroy](https://doi.org/10.1121/1.2988296) formula, applying them on a flat seafloor swathfile and find the best World Ocean Atlas 2018 sound velocity profiles for sound speed correction of a survey.
 
 ## General idea and preparation
 
@@ -13,12 +13,23 @@ MB-System tool to download World Ocean Atlas 2018 (WOA18) temperature and salini
 
 ### mbdownloadwoa18
 
+The **mbdownloadwoa18** can be used directly from the command line and takes the following arguments:
+
+- --area/A: Minimum and maximum longitude and latitude of the area of interest. Due to the nature of the dataset and the lack of circular axis support in xarray (to handle netcdf files) the longitude goes from -180 to 180, thus cutting through the Pacific. If interested in e.g. the whole Pacific a positive minimum longitude (e.g. 160) and a negative maximum latitude (e.g. -140) as the first two arguments allows for cropping across the Pacific by rolling the dataset within xarray (takes a bit more time). If setting min and max longitude both to 0 than the whole dataset is downloaded but rolled by 180 degree so that the dataset is 'cut' at 0 meridian. If not using this flag the dataset is downloaded from -180 to 180 degree. So for most applications this should not be an issue, but if working within the Pacific you might want to make use of the aforementioned ways to avoid the cut through the Pacific.
+- --outputfolder/O:
+- --period/P:
+- --resolution/R:
+- --time/T:
+- --correctiveterm/C:
+- 
 Recalculated coefficients by [Wong and Zhu](https://doi.org/10.1121/1.413048)
 
 [Leroy and Parthiot](https://doi.org/10.1121/1.421275)
 
 
 ### mbbestsvp
+
+## Example (Black Sea)
 
 ## Requirements
 
