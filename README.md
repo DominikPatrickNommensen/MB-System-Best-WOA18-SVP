@@ -37,7 +37,7 @@ The user will end up with a set of netcdf files corersponding to the specified p
 
 ## Example (Black Sea)
 
-[Cropped area](Example_Images/cropped_area.png)
+![Cropped area](Example_Images/cropped_area.png)
 
 ## Requirements
 
