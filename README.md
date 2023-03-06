@@ -3,7 +3,7 @@ MB-System tool to download World Ocean Atlas 2018 (WOA18) temperature and salini
 
 ## General idea and preparation
 
-![residuals](Example_Images/Residuals.png| width=100)
+![residuals](Example_Images/residual_sketch.png)
 
 ## Programs of this tool
 
