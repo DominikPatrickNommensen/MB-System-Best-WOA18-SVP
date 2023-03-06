@@ -62,6 +62,10 @@ python mbdownloadwoa18.py -O F:\test -T 01 -R 01 -A 27 43 40 49
 
 ![Cropped area](Example_Images/cropped_area.png)
 
+![best_svp](Example_Images/woa18_A5B7_SVcorrectedblacksea00an04_residuals.png)
+![worst_svp](Example_Images/internal_residuals.png)
+
+
 ## Requirements
 
 ### MB-System
