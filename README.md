@@ -1,5 +1,5 @@
 # MB-System-Best-WOA18-SVP
-MB-System tool to download World Ocean Atlas 2018 (WOA18) temperature and salinity files, calculate the sound velocity using the [UNESCO](10.25607/OBP-1450)  and the [Leroy](https://doi.org/10.1121/1.2988296) formula, applying them on a flat seafloor swathfile and find the best World Ocean Atlas 2018 sound velocity profiles for sound speed correction of a survey.
+MB-System tool to download World Ocean Atlas 2018 (WOA18) temperature and salinity files, calculate the sound velocity using the [UNESCO](dx.doi.org/10.25607/OBP-1450)  and the [Leroy](https://doi.org/10.1121/1.2988296) formula, applying them on a flat seafloor swathfile and find the best World Ocean Atlas 2018 sound velocity profiles for sound speed correction of a survey.
 
 ## General idea and preparation
 
@@ -14,6 +14,7 @@ MB-System tool to download World Ocean Atlas 2018 (WOA18) temperature and salini
 ### mbdownloadwoa18
 
 Recalculated coefficients by [Wong and Zhu](https://doi.org/10.1121/1.413048)
+
 [Leroy and Parthiot](https://doi.org/10.1121/1.421275)
 
 
