@@ -77,12 +77,20 @@ if __name__=='__main__':
                         folder where all the individual SVP profiles will be 
                         stored in. If not a new "svpprofiles" folder will be 
                         created in the current working directory.''')
+                        
+    parser.add_argument('-E', '--enddate', action='store_true', 
+                        metavar="Enddate", required=False,
+                        help='''If using this flag the end date of the swathfile 
+                        will be used instead of the start date. This is only 
+                        important if your transect happens to start at the end 
+                        of one month into another month so another month 
+                        might be equally interesting to check.''')
     
     args = parser.parse_args()
     sf = SwathFileInfo(period=args.period, resolution=args.resolution, 
                        swathfile=args.swathfile, svpfolder=args.svpfolder,
                        nearest=args.nearest)
-    sf.mbinfo()
+    sf.mbinfo(end=args.enddate)
     files = sf.get_filenames()
     
     swathfile_lolon = sf.lonmin_swathfile
