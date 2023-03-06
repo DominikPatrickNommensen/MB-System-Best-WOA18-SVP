@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 # import tracemalloc
 import gc
-import time
+
 
 
 def progress_bar(progress, total):
@@ -42,6 +42,8 @@ def overview_map(area, folder):
     ax.add_patch(mpatches.Rectangle(xy=[area[0], area[2]],
                                     width=width, height=height,
                                         facecolor='blue',
+                                        edgecolor='black',
+                                        zorder=12,
                                         alpha=0.2,
                                         transform=ccrs.PlateCarree()))
     
@@ -118,76 +120,94 @@ def allowed_area(area):
 
 
 if __name__=='__main__':
-    start_time = time.time()
+
     parser = argparse.ArgumentParser(formatter_class=
                                      argparse.ArgumentDefaultsHelpFormatter,
-                                     description=('Access the World Ocean Atlas'
-                                     '2018 Temperature and Salinity netcdf '
-                                     'files, calculate the sound velocity '
-                                     'profiles and store them.'))
+                                     description=('''Access the World Ocean Atlas 
+                                     2018 Temperature and Salinity netcdf 
+                                     files, calculate the sound velocity 
+                                     profiles and store them.'''))
       
     parser.add_argument('-A', '--area', required=False,
                         default='globe', nargs=4, 
                         metavar=('min_lon', 'max_lon', 'min_lat', 'max_lat'),
-                        help='Specify which longitude and latitude extent '
-                        'should be used from the netcdf files.\n The user can specify '
-                        'minima and maxima longitudes and latitudes [-180 to 180] '
-                        'like: [min lon, max lon, min lat, max lat]. This '
-                        'option might be useful to extract a subset e.g. a '
-                        'basin used for multiple missions. If specifying a ' 
-                        'min lon > max lon it is assumed the user wants to '
-                        'download the data with no cut through the pacific e.g. '
-                        '160 -120 would result in cropping the dataset to only '
-                        'get the area around 160 to 240 (360 degree notation). '
-                        'If the user wants to get the entire world but with a '
-                        'cut at 0 degree instead through the Pacific they should '
-                        'use 0 for both min and max longitude.\n NOTE: Larger '
-                        'areas will take longer times. Also not cutting through '
-                        'the Pacific takes longer due to "rolling" of the dataset.\n '
-                        'Omitting this argument does not crop the original extent of the '
-                        'WOA temperature and salinity files and use the '
-                        'whole globe with a cut through the Pacific.\n')
+                        help='''Specify which longitude and latitude extent 
+                        should be used from the netcdf files.\n The user can specify 
+                        minima and maxima longitudes and latitudes [-180 to 180] 
+                        like: [min lon, max lon, min lat, max lat]. This 
+                        option might be useful to extract a subset e.g. a 
+                        basin used for multiple missions. If specifying a  
+                        positive min lon > negative max lon it is assumed the user wants to 
+                        download the data with no cut through the pacific e.g. 
+                        160 -120 would result in cropping the dataset to only 
+                        get the area around 160 to 240 (360 degree notation). 
+                        If the user wants to get the entire world but with a 
+                        cut at 0 degree instead through the Pacific they should 
+                        use 0 for both min and max longitude.\n NOTE: Larger 
+                        areas will take longer times. Also not cutting through 
+                        the Pacific takes longer due to "rolling" of the dataset.\n 
+                        Omitting this argument does not crop the original extent of the 
+                        WOA temperature and salinity files and use the 
+                        whole globe with a cut through the Pacific.\n''')
 
     parser.add_argument('-O', '--outputfolder', type=str, required=True,
                         metavar="SVP folderpath",
-                        help='Output folder path to where the calculated '
-                        'sound velocity netcdf files should be stored.')
+                        help='''Output folder path to where the calculated 
+                        sound velocity netcdf files should be stored.''')
     
     parser.add_argument('-P', '--period', type=str, required=False,
                         metavar="Averaged period", nargs='+', 
                         choices=["decav", "A5B7"],
-                        help='The user can choose between averaged decades '
-                        '[decav] and the 2005 to 2017 average [A5B7] periods '
-                        'If not using this argument both periods will be '
-                        'used.')
+                        default=["decav", "A5B7"],
+                        help='''The user can choose between averaged decades 
+                        [decav] and the 2005 to 2017 average [A5B7] periods 
+                        If not using this argument both periods will be 
+                        used.''')
     
     parser.add_argument('-R', '--resolution', type=str, required=False, 
                         metavar="Grid resolution", nargs='+',
                         choices=["01", "04"],
-                        help='The user can choose between the coarser 1° [01] '
-                        'or the finer 0.25° [04] grid resolution. If not '
-                        'using this argument both grid resolutions will be '
-                        'used.')
+                        default=["01", "04"],
+                        help='''The user can choose between the coarser 1° [01] 
+                        or the finer 0.25° [04] grid resolution. If not 
+                        using this argument both grid resolutions will be 
+                        used.''')
     
     parser.add_argument('-T', '--time', type=str, required=False, 
                         metavar="Time period", nargs='+',
                         choices=["00", "01", "02", "03", "04", "05", "06", 
                                  "07", "08", "09", "10", "11", "12", "13", 
                                  "14", "15", "16"],
-                        help='The user can specify which months '
-                        '[01-12], which seasons [winter=13, spring=14, '
-                        'summer=15, autumn=16] and/or the annual [00] should '
-                        'be used. If not using this argument all times will '
-                        'be used.')
+                        default=["00", "01", "02", "03", "04", "05", "06", 
+                                 "07", "08", "09", "10", "11", "12", "13", 
+                                 "14", "15", "16"],
+                        help='''The user can specify which months 
+                        [01-12], which seasons [winter=13, spring=14, 
+                        summer=15, autumn=16] and/or the annual [00] should 
+                        be used. If not using this argument all times will 
+                        be used.''')
+    
+    parser.add_argument('-C', '--correctiveterm', type=str, required=False,
+                        metavar='Corrective term', nargs=1, default='NONE', 
+                        choices=["NONE", "COM", "NEA", "CPAW", "MED", "JAP",
+                                 "SULU", "HAMA", "CELE", "BLACK", "BALTIC"],
+                        help='''The user can specify which corrective term 
+                        will be used to calculate the pressure that is needed 
+                        for the Chen-Millero sound velocity calculation. The user 
+                        can choose from: "NONE", "COM", "NEA", "CPAW", "MED", 
+                        "JAP", "SULU", "HAMA", "CELE", "BLACK", "BALTIC"''')
     
     args = parser.parse_args()
     args.area = allowed_area(args.area)
     ao = AccessOpendap18(period=args.period, resolution=args.resolution,
                           time=args.time)
-
+    
+    if type(args.correctiveterm) is list:
+        args.correctiveterm = args.correctiveterm[0]
+        
     progress_bar(0, len(ao.url_list))
     for i, pair in enumerate(ao.url_list):
-        svp = CalculateSvp(args.area, pair)
+        svp = CalculateSvp(args.area, pair, args.correctiveterm)
         svp.crop_and_combine()
         svp.calculate_pressure()
         svp.calculate_sound_velocity()
@@ -201,4 +221,3 @@ if __name__=='__main__':
         progress_bar(i + 1, len(ao.url_list))
         
     overview_map(args.area, Path(args.outputfolder))
-    print(time.time() - start_time)
