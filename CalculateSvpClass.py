@@ -353,21 +353,9 @@ class SwathFileInfo():
         self.nearest = nearest
         self.base_file = 'woa18_{0}_svp{1}_{2}.nc'
         self.swathfile = swathfile
-        self.setup(resolution, period)
-        
-    def setup(self, resolution, period):
-        
-        if resolution == 'both':
-            self.resolution = ["01", "04"]
-        else:
-            self.resolution = [resolution]
-            
-        if period == 'both':
-            self.period = ["decav", "A5B7"]
-        else:
-            self.period = [period]
-            
-            
+        self.resolution = resolution
+        self.period = period
+         
     def mbinfo(self, end=False):
         
         info = subprocess.run(["mbinfo", "-I {}".format(self.swathfile)],
