@@ -69,7 +69,7 @@ def allowed_area(area):
     list of floats
         After successful validation returns either a list of 4 float elements 
         representing the latitudinal and longitudinal extent of the desired area
-        as passed to the function or the whole globe. 
+        as passed to the function or the whole globe (cut through the pacific). 
     '''
     
     msg = ("%r is not a valid argument. Please use 'globe' "
@@ -127,22 +127,29 @@ if __name__=='__main__':
                                      'profiles and store them.'))
       
     parser.add_argument('-A', '--area', required=False,
-                        default='globe', metavar="Area extent", nargs=4,
+                        default='globe', nargs=4, 
+                        metavar=('min_lon', 'max_lon', 'min_lat', 'max_lat'),
                         help='Specify which longitude and latitude extent '
-                        'should be used from the netcdf files.\n The user can '
-                        'use [globe] to not crop the original extent of the '
-                        'WOA temperature and salinity files and use the '
-                        'whole globe.\n The user can also use [auto] to '
-                        'crop the files to only the area around the current '
-                        'swathfiles.\n Alternatively, the user can specify '
+                        'should be used from the netcdf files.\n The user can specify '
                         'minima and maxima longitudes and latitudes [-180 to 180] '
                         'like: [min lon, max lon, min lat, max lat]. This '
                         'option might be useful to extract a subset e.g. a '
-                        'basin used for multiple missions.\n NOTE: Larger '
-                        'areas will take longer times.')
+                        'basin used for multiple missions. If specifying a ' 
+                        'min lon > max lon it is assumed the user wants to '
+                        'download the data with no cut through the pacific e.g. '
+                        '160 -120 would result in cropping the dataset to only '
+                        'get the area around 160 to 240 (360 degree notation). '
+                        'If the user wants to get the entire world but with a '
+                        'cut at 0 degree instead through the Pacific they should '
+                        'use 0 for both min and max longitude.\n NOTE: Larger '
+                        'areas will take longer times. Also not cutting through '
+                        'the Pacific takes longer due to "rolling" of the dataset.\n '
+                        'Omitting this argument does not crop the original extent of the '
+                        'WOA temperature and salinity files and use the '
+                        'whole globe with a cut through the Pacific.\n')
 
     parser.add_argument('-O', '--outputfolder', type=str, required=True,
-                        metavar="SVP Folder",
+                        metavar="SVP folderpath",
                         help='Output folder path to where the calculated '
                         'sound velocity netcdf files should be stored.')
     
