@@ -2,7 +2,8 @@
 # coding: utf-8
 
 import argparse
-from CalculateSvpClass import SwathFileInfo, ApplySVP
+from SwathfileInfoClass import SwathFileInfo 
+from ApplySvpClass import ApplySVP
 from pathlib import Path
 import datetime
 
@@ -78,7 +79,7 @@ if __name__=='__main__':
                         created in the current working directory.''')
                         
     parser.add_argument('-E', '--enddate', action='store_true', 
-                        metavar="Enddate", required=False,
+                        required=False,
                         help='''If using this flag the end date of the swathfile 
                         will be used instead of the start date. This is only 
                         important if your transect happens to start at the end 

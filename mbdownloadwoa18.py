@@ -10,10 +10,7 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-# import tracemalloc
 import gc
-
-
 
 def progress_bar(progress, total):
     percent = 100 * (progress / float(total))

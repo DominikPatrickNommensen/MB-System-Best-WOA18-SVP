@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-#import xarray as xr
-#from pathlib import Path
 import numpy as np
 
 class AccessOpendap18():
