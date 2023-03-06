@@ -115,7 +115,7 @@ if __name__=='__main__':
     asvp = ApplySVP(args.swathfile)
     for svp in profile_folder.glob('*.svp'):
         asvp.apply_svp(svp)
-    asvp.svp_statistics(args.svpfolder)
+    asvp.svp_statistics(profile_folder)
         
         
         
