@@ -1,7 +1,7 @@
 # MB-System-Best-WOA18-SVP
 MB-System tool to download World Ocean Atlas 2018 (WOA18) temperature and salinity files, calculate the sound velocity using the [UNESCO](https://repository.oceanbestpractices.org/handle/11329/109) formula with corrective terms as well as the recalculated coefficients by [Wong and Zhu](https://doi.org/10.1121/1.413048) and the [Leroy](https://doi.org/10.1121/1.2988296) formula over all standard depths, applying them on a flat seafloor swathfile and find the best World Ocean Atlas 2018 sound velocity profiles for sound speed correction of a survey.
 
-## General idea and preparation
+## General idea
 Sound velocity profiles (SVP) are important for sound speed correction, however sometimes conditions at sea and time constraints lead to insufficient or no SVPS at all. The idea of this tool is to somewhat compensate for that by utilizing the World Ocean Atlas 2018 temperature and salinity data that are based on real in-situ measurements interpolated over several decades for different times, spatial resolutions and standard depths. Under the assumption of a rather flat seafloor, the detected depths of the beams of a multibeam ping should lay on a straight line if the applied SVP is a good/perfect one. If not, the calculated bathymetry will bend either upwards or downwards, especially on the outer beams as shown in the two images below. 
 
 ![residuals](Example_Images/Residuals.png)
