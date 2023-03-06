@@ -36,6 +36,9 @@ The user will end up with a set of netcdf files corersponding to the specified p
 ### mbbestsvp
 
 ## Example (Black Sea)
+```
+python mbdownloadwoa18.py -O F:\test -T 01 -R 01 -A 27 43 40 49
+```
 
 ![Cropped area](Example_Images/cropped_area.png)
 
