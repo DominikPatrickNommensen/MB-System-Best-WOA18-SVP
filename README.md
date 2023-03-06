@@ -51,9 +51,24 @@ The primary source of information about MB-System is the project website at [htt
 
 ### Python modules
 
+Some of these modules below need to be installed, some of them might already be installed and/or are part of core python:
+
+- argparse
+- cartopy
+- datetime
+- gc
+- io
+- matplotlib
+- numpy
+- pandas
+- pathlib
+- re
+- subprocess
+- xarray (with dependencies)
 
 ## Todos
 
-- [ ] Implementation into MB-System
-- [ ] Making sure all required python modules are present and/or setting up a python envrionment to guarantee correct execution
-- [ ] 
+- [ ] Implementation into MB-System.
+- [ ] Making sure all required python modules are present and/or setting up a python envrionment to guarantee correct execution (see above).
+- [ ] Making the "Pacific issue" somwhat smarter and more efficient.
+- [ ] Create a GUI.
