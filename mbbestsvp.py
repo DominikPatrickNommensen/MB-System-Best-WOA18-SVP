@@ -7,7 +7,6 @@ from pathlib import Path
 import datetime
 
 program_name = 'mbbestsvp'
-
 mb_version = 'VERSION'
 
 if __name__=='__main__':
