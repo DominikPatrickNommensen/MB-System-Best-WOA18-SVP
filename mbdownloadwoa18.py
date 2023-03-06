@@ -221,3 +221,4 @@ if __name__=='__main__':
         progress_bar(i + 1, len(ao.url_list))
         
     overview_map(args.area, Path(args.outputfolder))
+    print('All done!')
