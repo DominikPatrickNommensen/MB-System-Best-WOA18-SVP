@@ -117,6 +117,12 @@ Some of these modules below need to be installed, some of them might already be 
 - subprocess
 - xarray (with dependencies)
 
+For xarray and its dependencies this command should suffice:
+
+```
+pip install xarray netcdf4 scipy pydap h5netcdf
+```
+
 ## Todos
 
 - [ ] Implementation into MB-System.
