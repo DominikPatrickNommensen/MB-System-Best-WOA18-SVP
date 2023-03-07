@@ -123,3 +123,4 @@ Some of these modules below need to be installed, some of them might already be 
 - [ ] Making sure all required python modules are present and/or setting up a python envrionment to guarantee correct execution (see above).
 - [ ] Making the "Pacific issue" somwhat smarter and more efficient.
 - [ ] Create a GUI.
+- [ ] Auto crop the area based on corrective term option implementation.
