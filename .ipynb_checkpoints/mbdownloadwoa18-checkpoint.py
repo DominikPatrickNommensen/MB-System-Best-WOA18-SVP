@@ -152,14 +152,25 @@ if __name__=='__main__':
                         help='''Output folder path to where the calculated 
                         sound velocity netcdf files should be stored.''')
 
+    ## woa18 (old)
+    # parser.add_argument('-P', '--period', type=str, required=False,
+    #                     metavar="Averaged period", nargs='+', 
+    #                     choices=["decav", "A5B7"],
+    #                     default=["decav", "A5B7"],
+    #                     help='''The user can choose between averaged decades 
+    #                     [decav] and the 2005 to 2017 average [A5B7] periods 
+    #                     If not using this argument both periods will be 
+    #                     used.''')
+
     parser.add_argument('-P', '--period', type=str, required=False,
                         metavar="Averaged period", nargs='+', 
-                        choices=["decav", "A5B7"],
-                        default=["decav", "A5B7"],
-                        help='''The user can choose between averaged decades 
-                        [decav] and the 2005 to 2017 average [A5B7] periods 
-                        If not using this argument both periods will be 
+                        choices=["decav91C0", "decav81B0", "decav71A0", "B5C2", "A5B4", "95A4", "8594", "7584", "6574", "5564"],
+                        default=["decav", "B5C2"],
+                        help='''The user can choose which period(s) to use
+                        If not using this argument decav (averaged decades)
+                        and B5C2 (2015 to 2022) will be 
                         used.''')
+     
     
     parser.add_argument('-R', '--resolution', type=str, required=False, 
                         metavar="Grid resolution", nargs='+',
