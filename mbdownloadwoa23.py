@@ -121,7 +121,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser(formatter_class=
                                      argparse.ArgumentDefaultsHelpFormatter,
                                      description=('''Access the World Ocean Atlas 
-                                     2018 Temperature and Salinity netcdf 
+                                     2023 Temperature and Salinity netcdf 
                                      files, calculate the sound velocity 
                                      profiles and store them.'''))
       
@@ -154,7 +154,7 @@ if __name__=='__main__':
 
     parser.add_argument('-P', '--period', type=str, required=False,
                         metavar="Averaged period", nargs='+', 
-                        choices=["decav91C0", "decav81B0", "decav71A0", "B5C2", "A5B4", "95A4", "8594", "7584", "6574", "5564"],
+                        choices=["decav", "decav91C0", "decav81B0", "decav71A0", "B5C2", "A5B4", "95A4", "8594", "7584", "6574", "5564"],
                         default=["decav", "B5C2"],
                         help='''The user can choose which period(s) to use
                         If not using this argument decav (averaged decades)
