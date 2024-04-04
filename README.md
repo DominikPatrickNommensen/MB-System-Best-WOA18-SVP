@@ -20,7 +20,7 @@ This tool applies a number of WOA18-derived and additional (if present) SVPs tha
 | mbbestsvp               | Calculates/extracts several SVP files based on the date and extent of a swathfile (flat seafloor), by either using the mean of 4 surrounding profiles or by using the closest grid point. All SVPs are applied and their capability of flattening the seafloor is evaluated and ranked against one another, including the SVPs stored in the swathfile itself.
 
 
-### mbdownloadwoa18
+### mbdownloadwoa18 (mbdownloadwoa23 should work the same way; periods not updated yet)
 
 The **mbdownloadwoa18** can be used directly from the command line and takes the following arguments:
 
@@ -122,6 +122,21 @@ For xarray and its dependencies this command should suffice:
 ```
 pip install xarray netcdf4 scipy pydap h5netcdf
 ```
+
+## Conda environment to run mbdownload18 and mbdownload23 (only tested on author's mac):
+
+The name svptool can be altered to whatever you prefer
+
+1. conda create —name svptool
+2. conda activate [envname]
+3. conda install numpy
+4. conda install pandas
+5. conda install matplotlib
+6. conda install pip
+7. conda install -c conda-forge xarray dask netCDF4 bottleneck
+8. pip install cartopy
+
+After creating the environment and installing the packages you can just execute the download script with your activated envrionment (python or python3)
 
 ## Todos
 
