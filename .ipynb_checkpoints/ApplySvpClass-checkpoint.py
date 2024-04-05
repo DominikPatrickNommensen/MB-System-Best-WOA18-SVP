@@ -17,6 +17,7 @@ class ApplySVP():
         self.metrics = {}
         self.swathfile = swathfile
         self.processed_swathfile = "p.".join(self.swathfile.split("."))
+        print(self.processed_swathfile)
         
     def apply_svp(self, svpfile):
         
@@ -31,6 +32,8 @@ class ApplySVP():
         df_current_ping = pd.read_csv(StringIO(current_ping),
                     names=["Ping number", "Beam number", "Longitude",
                            "Latitude", "Depth"])
+
+        # print(df_current_ping.iloc[0:10,:])
         
         df_current_ping = self.adjust_pings(df_current_ping)
         
