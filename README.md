@@ -127,7 +127,7 @@ pip install xarray netcdf4 scipy pydap h5netcdf
 
 The name svptool can be altered to whatever you prefer
 
-1. conda create —name svptool
+1. conda create —name svptool (python=3.10)
 2. conda activate [envname]
 3. conda install numpy
 4. conda install pandas
