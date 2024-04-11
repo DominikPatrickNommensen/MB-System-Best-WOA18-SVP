@@ -6,6 +6,7 @@ from SwathfileInfoClass23 import SwathFileInfo
 from ApplySvpClass import ApplySVP
 from pathlib import Path
 import datetime
+import subprocess
 
 program_name = 'mbbestsvp'
 mb_version = 'VERSION'
@@ -153,9 +154,17 @@ if __name__=='__main__':
                     "## SVP Count: {}\n".format(len(df)))
             f.write(df["v_an_chen"].to_string(header=False, index=True))
     
-    sf.extract_svp()
-    for internal in Path.cwd().glob('*svp'):
-        internal.rename(profile_folder / internal.name)
+    # sf.extract_svp()
+    internal_svp = subprocess.run(["mbsvplist", "-I {}".format(args.swathfile), "-V"],
+                              capture_output=True, text=True).stdout
+
+    internal_svp_file = profile_folder / (Path(internal_svp.split('## Swath File: ')[-1].split('\n')[0]).stem + '.svp')
+    
+    # internal_file = profile_folder / 
+    with Path(internal_svp_file).open(mode='w') as f:
+        f.write(internal_svp)
+    # for internal in Path.cwd().glob('*svp'):
+    #     internal.rename(profile_folder / internal.name)
         
     #apply svp part
     asvp = ApplySVP(args.swathfile)
