@@ -117,7 +117,7 @@ if __name__=='__main__':
         leroy_file = profile_folder / "{}_leroy.svp".format(file.stem)
         with leroy_file.open(mode='w') as f:
             f.write("## World Ocean Atlas 2023 (WOA23) SVP\n" +
-                    "## WOA18 grid resolution: {}\n".format(file.stem[-2:]) +
+                    "## WOA23 grid resolution: {}\n".format(file.stem[-2:]) +
                     "## WOA23 averaged decades: {}\n".format(file.stem[6:10]) +
                     "## WOA23 time period: {}\n".format(file.stem[-5:-3]) +
                     "## Water sound velocity formula used: Leroy\n" +
@@ -158,6 +158,8 @@ if __name__=='__main__':
     internal_svp = subprocess.run(["mbsvplist", "-I {}".format(args.swathfile), "-V"],
                               capture_output=True, text=True).stdout
 
+
+    internal_svp_list = internal_svp.split('## MB-SVP')
     internal_svp_file = profile_folder / (Path(internal_svp.split('## Swath File: ')[-1].split('\n')[0]).stem + '.svp')
     
     # internal_file = profile_folder / 
