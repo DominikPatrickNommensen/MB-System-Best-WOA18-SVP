@@ -155,23 +155,27 @@ if __name__=='__main__':
             f.write(df["v_an_chen"].to_string(header=False, index=True))
     
     # sf.extract_svp()
-    internal_svp = subprocess.run(["mbsvplist", "-I {}".format(args.swathfile), "-V"],
-                              capture_output=True, text=True).stdout
+    # internal_svp = subprocess.run(["mbsvplist", "-I {}".format(args.swathfile), "-V"],
+    #                           capture_output=True, text=True).stdout
 
 
-    internal_svp_list = internal_svp.split('## MB-SVP')
-    internal_svp_file = profile_folder / (Path(internal_svp.split('## Swath File: ')[-1].split('\n')[0]).stem + '.svp')
+    # internal_svp_list = internal_svp.split('## MB-SVP')
+    # internal_svp_file = profile_folder / (Path(internal_svp.split('## Swath File: ')[-1].split('\n')[0]).stem + '.svp')
     
     # internal_file = profile_folder / 
-    with Path(internal_svp_file).open(mode='w') as f:
-        f.write(internal_svp)
+    # with Path(internal_svp_file).open(mode='w') as f:
+    #     f.write(internal_svp)
     # for internal in Path.cwd().glob('*svp'):
     #     internal.rename(profile_folder / internal.name)
-        
+    
+    subprocess.run(["mbsvplist", "-I {}".format(args.swathfile), "-O", "-V"])
+    for internal in Path(args.swathfile).parents[0].glob('*svp'):
+        internal.rename(profile_folder / internal.name)
+    
     #apply svp part
     asvp = ApplySVP(args.swathfile)
     for svp in profile_folder.glob('*.svp'):
-        print(svp)
+        # print(svp)
         asvp.apply_svp(svp)
     asvp.svp_statistics(profile_folder)
         
